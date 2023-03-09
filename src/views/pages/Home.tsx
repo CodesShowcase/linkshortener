@@ -4,18 +4,15 @@ import {
     Button,
     Container,
     CssBaseline,
-    TextField,
-    Typography
+    TextField
   } from '@mui/material'
-
-interface PushProps {
-  title: string
-}
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import clipboard from 'clipboard-copy'
 
 
-const Home = (props: PushProps) => {
+  const Home = () => {
   const [err, setErr] = useState('')
-  const [shortLink, setShortLink] = useState('Test')
+  const [shortLink, setShortLink] = useState('')
 
   // Eyecandy
   console.log(err)
@@ -33,8 +30,6 @@ const Home = (props: PushProps) => {
       }
       const result = await response.json()
       setShortLink(result.shorturl)
-      console.log(result)
-
     } catch (err) {
       let errorMessage = "Failed to do something exceptional";
       if (err instanceof Error) {
@@ -47,9 +42,8 @@ const Home = (props: PushProps) => {
 
   return (
     <Container component="main" maxWidth="xs" className="auth-form">
-      <Typography variant="h2" className="auth-header">{props.title}</Typography>
       <CssBaseline />
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexWrap: 'wrap', mt: 1 }}>
         <TextField
           margin="normal"
           required
@@ -67,9 +61,24 @@ const Home = (props: PushProps) => {
         >
           Shorten URL
         </Button>
-        <Typography variant="h1" component="h2">
-          {shortLink}
-        </Typography>
+        <TextField
+          margin="normal"
+          fullWidth
+          id="shortURL"
+          name="shortURL"
+          label="Short URL"
+          value={shortLink}
+          disabled
+          sx={{ alignSelf: 'flex-end', width: '80%' }}
+        />
+        <Button
+          onClick={() => { clipboard(shortLink) }}
+          fullWidth
+          variant="contained"
+          sx={{ mt: 2, mb: 1, width: '20%' }}
+        >
+          <ContentCopyIcon />
+        </Button>
       </Box>
     </Container>
   )
