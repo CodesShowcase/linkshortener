@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# This is a React Linkshortener
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can shorten regular links and copy them to the clipboard. It works really nice.
 
 ## Available Scripts
 
